@@ -1,0 +1,10 @@
+body {
+    font-family: fantasy;
+    background-color: darkgray;
+    margin-left: 100px;
+    padding: 35px;
+}
+header {
+    font-size: 40px;
+    font-weight: bold;
+}
