@@ -12,6 +12,7 @@ function addItem() {
   itemList.appendChild(list);
   itemInput.value = '';
   addClick(list); //7
+  addDbClick(list); //9
 }
 
 //7 Clicar em um item da lista deve alterar a cor de fundo do item para cinza
@@ -30,4 +31,20 @@ function addColor(element) {
 }
 
 //8 Não deve ser possível selecionar mais de um elemento da lista ao mesmo tempo
+
+//9 Clicar duas vezes em um item, faz com que ele seja riscado, indicando que foi completo. Deve ser possível desfazer essa ação clicando novamente duas vezes no item
+function addDbClick(element) {
+  element.addEventListener('dblclick', function() {
+    addLineThrough(element);
+  })
+}
+
+function addLineThrough(element) {
+  let compStyle = window.getComputedStyle(element).textDecoration;
+  if (element.className === 'completed' || compStyle === 'line-through solid black') {
+    element.className = '';
+  }
+  else {element.className = 'completed';
+  }
+}
 

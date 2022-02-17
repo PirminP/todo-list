@@ -13,3 +13,7 @@ header {
   font-size: 25px;
   text-decoration: underline;
 }
+
+.completed {
+  text-decoration: line-through solid black;
+}
