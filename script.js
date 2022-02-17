@@ -5,10 +5,16 @@ let itemInput = document.querySelector('#texto-tarefa');
 let itemList = document.querySelector('#lista-tarefas');
 let deleteAllButton = document.querySelector('#apaga-tudo'); //10
 let deleteButton = document.querySelector('#remover-finalizados') //11
+let saveButton = document.querySelector('#salvar-tarefas'); //12
+
+window.onload = function() { //12
+  loadItemList()             //12
+}                            //12
 
 itemButton.addEventListener('click', addItem);
 deleteAllButton.addEventListener('click', deleteList); //10
 deleteButton.addEventListener('click', deleteFinishedItem); //11
+saveButton.addEventListener('click', saveList); //12
 
 function addItem() {
   let list = document.createElement('li');
@@ -70,3 +76,31 @@ function deleteFinishedItem () {
   }
 }
 
+//12
+function saveList () {
+  let listText = [];
+  let listClass = [];
+  let taskItems = document.querySelectorAll('ol li');
+  for (let item of taskItems) {
+    listText.push(item.innerText);
+    listClass.push(item.className);
+  }
+  localStorage.setItem('savedList', JSON.stringify(listText));
+  localStorage.setItem('savedClass', JSON.stringify(listClass));
+}
+function loadItemList () {
+  if (localStorage.getItem('savedList') == null) {
+    return
+  } else {
+    let listText = JSON.parse(localStorage.getItem('savedList'));
+    let listClass = JSON.parse(localStorage.getItem('savedClass'));
+    for (let i = 0; i < listText.length; i += 1) {
+      let list = document.createElement('li');
+      list.innerText = listText[i];
+      list.className = listClass[i];
+      itemList.appendChild(list);
+      addClick(list);
+      addDbClick(list);
+    }
+  }
+}
