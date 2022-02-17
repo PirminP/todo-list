@@ -3,8 +3,12 @@
 let itemButton = document.querySelector('#criar-tarefa');
 let itemInput = document.querySelector('#texto-tarefa');
 let itemList = document.querySelector('#lista-tarefas');
+let deleteAllButton = document.querySelector('#apaga-tudo'); //10
+let deleteButton = document.querySelector('#remover-finalizados') //11
 
 itemButton.addEventListener('click', addItem);
+deleteAllButton.addEventListener('click', deleteList); //10
+deleteButton.addEventListener('click', deleteFinishedItem); //11
 
 function addItem() {
   let list = document.createElement('li');
@@ -45,6 +49,24 @@ function addLineThrough(element) {
     element.className = '';
   }
   else {element.className = 'completed';
+  }
+}
+
+//10
+function deleteList() {
+  let taskItems = document.querySelectorAll('ol li');
+  for (let allItems of taskItems) {
+    allItems.remove();
+  }
+}
+
+//11
+function deleteFinishedItem () {
+  let taskItems = document.querySelectorAll('ol li');
+  for (let item of taskItems) {
+    if (item.className === 'completed') {
+      item.remove();
+    }
   }
 }
 
